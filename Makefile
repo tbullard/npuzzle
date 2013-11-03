@@ -17,15 +17,16 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = arraylist.o llist.o search.o hashm.o main.o npuzzle.o hasht.o heap.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+OCTO = $(shell [ -d "$(ODIR)" ] || mkdir -p $(ODIR))
 
 $(ODIR)/%.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(TARGET): $(OBJ)
+$(TARGET): $(OCTO) $(OBJ)
 	gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o
+	rm -r $(ODIR)
 	rm $(TARGET)
