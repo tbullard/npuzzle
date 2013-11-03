@@ -3,6 +3,8 @@
 
 #include "ugf.h"
 
+#define DEFAULT_HEAP_CAPACY 89
+
 typedef int (*heap_comp)(const void*, const void*);
 
 struct heap_node;

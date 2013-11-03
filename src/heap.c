@@ -1,7 +1,5 @@
 #include "heap.h"
 
-#define DEFAULT_HEAP_CAPACY 89
-
 typedef struct heap_node {
     void* data;
     int index;
