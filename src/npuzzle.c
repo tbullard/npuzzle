@@ -1,128 +1,128 @@
 #include "npuzzle.h"
 
-static void first_row_tile_swap(npuzzle** board, int form);
-static void first_col_tile_swap(npuzzle** board, int form);
-static void first_row_first_col_tile_swap(npuzzle** board, int form);
-static void first_row_last_col_tile_swap(npuzzle** board, int form);
-static void last_row_tile_swap(npuzzle** board, int form);
-static void last_col_tile_swap(npuzzle** board, int form);
-static void last_row_first_col_tile_swap(npuzzle** board, int form);
-static void last_row_last_col_tile_swap(npuzzle** board, int form);
-static void neutral_tile_swap(npuzzle** board, int form);
+static void first_row_tile_swap(npuzzle* board, int form);
+static void first_col_tile_swap(npuzzle* board, int form);
+static void first_row_first_col_tile_swap(npuzzle* board, int form);
+static void first_row_last_col_tile_swap(npuzzle* board, int form);
+static void last_row_tile_swap(npuzzle* board, int form);
+static void last_col_tile_swap(npuzzle* board, int form);
+static void last_row_first_col_tile_swap(npuzzle* board, int form);
+static void last_row_last_col_tile_swap(npuzzle* board, int form);
+static void neutral_tile_swap(npuzzle* board, int form);
 
-static void first_row_tile_swap(npuzzle** board, int form) {
+static void first_row_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + 1);
-        (*board)->hole_tile++;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + 1);
+        board->hole_tile++;
     } else if(form == 1) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - 1);
-        --(*board)->hole_tile;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - 1);
+        --board->hole_tile;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + (*board)->board_dim);
-        (*board)->hole_tile += (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + board->board_dim);
+        board->hole_tile += board->board_dim;
     }
     return;
 }
 
-static void first_col_tile_swap(npuzzle** board, int form) {
+static void first_col_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + 1);
-        (*board)->hole_tile++;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + 1);
+        board->hole_tile++;
     } else if(form == 1) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - (*board)->board_dim);
-        (*board)->hole_tile -= (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - board->board_dim);
+        board->hole_tile -= board->board_dim;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + (*board)->board_dim);
-        (*board)->hole_tile += (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + board->board_dim);
+        board->hole_tile += board->board_dim;
     }
     return;
 }
 
-static void first_row_first_col_tile_swap(npuzzle** board, int form) {
+static void first_row_first_col_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + 1);
-        (*board)->hole_tile++;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + 1);
+        board->hole_tile++;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + (*board)->board_dim);
-        (*board)->hole_tile += (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + board->board_dim);
+        board->hole_tile += board->board_dim;
     }
     return;
 }
 
-static void first_row_last_col_tile_swap(npuzzle** board, int form) {
+static void first_row_last_col_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - 1);
-        --(*board)->hole_tile;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - 1);
+        --board->hole_tile;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + (*board)->board_dim);
-        (*board)->hole_tile += (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + board->board_dim);
+        board->hole_tile += board->board_dim;
     }
     return;
 }
 
-static void last_row_tile_swap(npuzzle** board, int form) {
+static void last_row_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + 1);
-        (*board)->hole_tile++;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + 1);
+        board->hole_tile++;
     } else if(form == 1) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - 1);
-        --(*board)->hole_tile;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - 1);
+        --board->hole_tile;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - (*board)->board_dim);
-        (*board)->hole_tile -= (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - board->board_dim);
+        board->hole_tile -= board->board_dim;
     }
     return;
 }
 
-static void last_col_tile_swap(npuzzle** board, int form) {
+static void last_col_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - 1);
-        --(*board)->hole_tile;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - 1);
+        --board->hole_tile;
     } else if(form == 1) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + (*board)->board_dim);
-        (*board)->hole_tile += (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + board->board_dim);
+        board->hole_tile += board->board_dim;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - (*board)->board_dim);
-        (*board)->hole_tile -= (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - board->board_dim);
+        board->hole_tile -= board->board_dim;
     }
     return;
 }
 
-static void last_row_first_col_tile_swap(npuzzle** board, int form) {
+static void last_row_first_col_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + 1);
-        (*board)->hole_tile++;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + 1);
+        board->hole_tile++;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - (*board)->board_dim);
-        (*board)->hole_tile -= (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - board->board_dim);
+        board->hole_tile -= board->board_dim;
     }
     return;
 }
 
-static void last_row_last_col_tile_swap(npuzzle** board, int form) {
+static void last_row_last_col_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - 1);
-        --(*board)->hole_tile;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - 1);
+        --board->hole_tile;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - (*board)->board_dim);
-        (*board)->hole_tile -= (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - board->board_dim);
+        board->hole_tile -= board->board_dim;
     }
     return;
 }
 
-static void neutral_tile_swap(npuzzle** board, int form) {
+static void neutral_tile_swap(npuzzle* board, int form) {
     if(!form) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + 1);
-        (*board)->hole_tile++;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + 1);
+        board->hole_tile++;
     } else if(form == 1) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - 1);
-        --(*board)->hole_tile;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - 1);
+        --board->hole_tile;
     } else if(form == 2) {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile + (*board)->board_dim);
-        (*board)->hole_tile += (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile + board->board_dim);
+        board->hole_tile += board->board_dim;
     } else {
-        array_list_swap((*board)->board_state, (*board)->hole_tile, (*board)->hole_tile - (*board)->board_dim);
-        (*board)->hole_tile -= (*board)->board_dim;
+        array_list_swap(board->board_state, board->hole_tile, board->hole_tile - board->board_dim);
+        board->hole_tile -= board->board_dim;
     }
 }
 
@@ -145,30 +145,30 @@ npuzzle* npuzzle_make_game(int board_dim) {
         if(new_board->hole_tile - board_dim < 0 || !(new_board->hole_tile % board_dim)) { /* FR or FC */
             if(new_board->hole_tile % board_dim) { /* FR, !LR, !FC */
                 if((new_board->hole_tile + 1) % board_dim) { /* FR, !LR, !FC, !LC */
-                    first_row_tile_swap(&new_board, (rand() % 3));
+                    first_row_tile_swap(new_board, (rand() % 3));
                 } else { /* FRLC */
-                    first_row_last_col_tile_swap(&new_board, (rand() % 2));
+                    first_row_last_col_tile_swap(new_board, (rand() % 2));
                 }
             } else if (new_board->hole_tile - board_dim >= 0){ /* !FR, FC, !LC */
                 if(new_board->hole_tile - ((board_dim - 1) * board_dim) < 0) { /* !FR, !LR, FC, !LC */
-                    first_col_tile_swap(&new_board, (rand() % 3));
+                    first_col_tile_swap(new_board, (rand() % 3));
                 } else { /* LRFC */
-                    last_row_first_col_tile_swap(&new_board, (rand() % 2));
+                    last_row_first_col_tile_swap(new_board, (rand() % 2));
                 }
             } else { /* FRFC */
-                first_row_first_col_tile_swap(&new_board, (rand() % 2));
+                first_row_first_col_tile_swap(new_board, (rand() % 2));
             }
         } else if(new_board->hole_tile - ((board_dim - 1) * board_dim) >= 0 ||
                   !((new_board->hole_tile + 1) % board_dim)) { /* LR or LC, !FR, !FC */
             if((new_board->hole_tile + 1) % board_dim) { /* !FR, LR, !FC, !LC */
-                last_row_tile_swap(&new_board, (rand() % 3));
+                last_row_tile_swap(new_board, (rand() % 3));
             } else if (new_board->hole_tile - ((board_dim - 1) * board_dim) < 0) { /* !LR, !FR, !FC, LC */
-                last_col_tile_swap(&new_board, (rand() % 3));
+                last_col_tile_swap(new_board, (rand() % 3));
             } else { /* LRLC */
-                last_row_last_col_tile_swap(&new_board, (rand() % 2));
+                last_row_last_col_tile_swap(new_board, (rand() % 2));
             }
         } else { /* Neutral */
-            neutral_tile_swap(&new_board, (rand() % 4));
+            neutral_tile_swap(new_board, (rand() % 4));
         }
     }
     return new_board;
@@ -207,14 +207,14 @@ list* npuzzle_gen_successors(npuzzle* board, void* null) {
                 for(i = 0; i < 3; i++) {
                     successor_board = npuzzle_copy_game(board);
                     successor_board->f_cost = 0;
-                    first_row_tile_swap(&successor_board, i);
+                    first_row_tile_swap(successor_board, i);
                     list_push_back(successor_list, successor_board);
                 }
             } else { /* FRLC */
                 for(i = 0; i < 2; i++) {
                     successor_board = npuzzle_copy_game(board);
                     successor_board->f_cost = 0;
-                    first_row_last_col_tile_swap(&successor_board, i);
+                    first_row_last_col_tile_swap(successor_board, i);
                     list_push_back(successor_list,successor_board);
                 }
             }
@@ -223,14 +223,14 @@ list* npuzzle_gen_successors(npuzzle* board, void* null) {
                 for(i = 0; i < 3; i++) {
                     successor_board = npuzzle_copy_game(board);
                     successor_board->f_cost = 0;
-                    first_col_tile_swap(&successor_board, i);
+                    first_col_tile_swap(successor_board, i);
                     list_push_back(successor_list, successor_board);
                 }
             } else { /* LRFC */
                 for(i = 0; i < 2; i++) {
                     successor_board = npuzzle_copy_game(board);
                     successor_board->f_cost = 0;
-                    last_row_first_col_tile_swap(&successor_board, i);
+                    last_row_first_col_tile_swap(successor_board, i);
                     list_push_back(successor_list, successor_board);
                 }
             }
@@ -238,7 +238,7 @@ list* npuzzle_gen_successors(npuzzle* board, void* null) {
             for(i = 0; i < 2; i++) {
                 successor_board = npuzzle_copy_game(board);
                 successor_board->f_cost = 0;
-                first_row_first_col_tile_swap(&successor_board, i);
+                first_row_first_col_tile_swap(successor_board, i);
                 list_push_back(successor_list, successor_board);
             }
         }
@@ -248,21 +248,21 @@ list* npuzzle_gen_successors(npuzzle* board, void* null) {
             for(i = 0; i < 3; i++) {
                 successor_board = npuzzle_copy_game(board);
                 successor_board->f_cost = 0;
-                last_row_tile_swap(&successor_board, i);
+                last_row_tile_swap(successor_board, i);
                 list_push_back(successor_list, successor_board);
             }
         } else if (board->hole_tile - ((board->board_dim - 1) * board->board_dim) < 0) { /* !LR, !FR, !FC, LC */
             for(i = 0; i < 3; i++) {
                 successor_board = npuzzle_copy_game(board);
                 successor_board->f_cost = 0;
-                last_col_tile_swap(&successor_board, i);
+                last_col_tile_swap(successor_board, i);
                 list_push_back(successor_list, successor_board);
             }
         } else { /* LRLC */
             for(i = 0; i < 2; i++) {
                 successor_board = npuzzle_copy_game(board);
                 successor_board->f_cost = 0;
-                last_row_last_col_tile_swap(&successor_board, i);
+                last_row_last_col_tile_swap(successor_board, i);
                 list_push_back(successor_list, successor_board);
             }
         }
@@ -270,7 +270,7 @@ list* npuzzle_gen_successors(npuzzle* board, void* null) {
         for(i = 0; i < 4; i++) {
             successor_board = npuzzle_copy_game(board);
             successor_board->f_cost = 0;
-            neutral_tile_swap(&successor_board, i);
+            neutral_tile_swap(successor_board, i);
             list_push_back(successor_list, successor_board);
         }
     }
