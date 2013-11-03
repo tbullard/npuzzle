@@ -406,38 +406,3 @@ void list_traverse(list* llist, generic_op do_func) {
     }
     return;
 }
-
-/*!
-   \file llist.c
-   \brief Linked List source file.
-   \details Source file for linked list, contains all functions and declarations, static and otherwise.
-   \note Traditional zero-style indexing is used for this linked list implementation. The first index is '0', second '1', etc.
-   \warning It is assumed that all data inserted into the list is heap allocated.
-   Failure durring deallocation will occur if that is not the case.
-   \author Timothy Bullard
-   \version 1.0
- */
-
-/*!
-   \struct lnode
-   \brief Fundamental node structure for linked list.
-   \var lnode::prev
-   Member 'prev' represents a pointer to the node that is previous, or behind, a given node.
-   \var lnode::next
-   Member 'next' represents a pointer to the node that is next, or in front of, a given node.
-   \var lnode::data
-   Member 'data' represents the allocated data to be stored in the node.
- */
-
-/*!
-   \var typedef struct lnode node
-   \brief Typedef of struct lnode to 'node'.
- */
-
-/*!
-  \static
-  \fn node* node_create(void* data)
-  \brief Creates note for given data.
-  \param data Allocated data to be wrapped in a lnode.
-  \return Newly allocated lnode containing data.
- */
