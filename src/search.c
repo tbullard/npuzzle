@@ -17,8 +17,8 @@ list* search_breadth_first(void* state,
     state_queue = list_create(NULL,
                               NULL,
                               state_free_func);
-    
-    state_closed_set = hash_table_create(89, .75,
+    state_closed_set = hash_table_create(89,
+                                         .75,
                                          state_hash_alg,
                                          state_comp_func,
                                          state_copy_func,
