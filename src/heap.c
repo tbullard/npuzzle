@@ -40,8 +40,10 @@ heap* heap_copy(heap* p_queue) {
     node* cur_node;
     new_heap = NULL;
     if(p_queue) {
-        new_heap = heap_create(p_queue->capacity, p_queue->heap_func,
-                               p_queue->comp_func, p_queue->copy_func,
+        new_heap = heap_create(p_queue->capacity,
+                               p_queue->heap_func,
+                               p_queue->comp_func,
+                               p_queue->copy_func,
                                p_queue->free_func);
         for(i = 0; i < p_queue->size; i++) {
             cur_node = p_queue->heap_memory[i];

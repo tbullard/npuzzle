@@ -29,7 +29,9 @@ hash_table* hash_table_create(unsigned int capacity,
     hash->comp_func = comp_func;
     hash->copy_func = copy_func;
     hash->free_func = free_func;
-    hash->load_factor_limit = (load_factor_limit > 0 && load_factor_limit <= 1) ? load_factor_limit : DEFAULT_LDFACT;
+    hash->load_factor_limit = (load_factor_limit > 0 &&
+                               load_factor_limit <= 1) ?
+                               load_factor_limit : DEFAULT_LDFACT;
     hash->capacity = (capacity > 0) ? capacity : DEFAULT_CAPACY;
     hash->size = 0;
     hash->cur_load_factor = 0;

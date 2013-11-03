@@ -126,7 +126,6 @@ static void neutral_tile_swap(npuzzle* board, int form) {
     }
 }
 
-
 npuzzle* npuzzle_make_game(int board_dim) {
     int i, *tile;
     npuzzle* new_board;
@@ -135,7 +134,9 @@ npuzzle* npuzzle_make_game(int board_dim) {
     new_board->parent_state = NULL;
     new_board->board_dim = board_dim;
     new_board->hole_tile = (board_dim * board_dim) - 1;
-    new_board->board_state = array_list_create(NULL, (generic_cpy)tile_copy, (generic_op)free);
+    new_board->board_state = array_list_create(NULL,
+                                               (generic_cpy)tile_copy,
+                                               (generic_op)free);
     for(i = 0; i < new_board->hole_tile + 1; i++) {
         tile = malloc(sizeof(int));
         *tile = i;
@@ -187,7 +188,9 @@ npuzzle* npuzzle_copy_game(npuzzle* board) {
 
 list* npuzzle_backtrace(npuzzle* board) {
     list* back_path;
-    back_path = list_create(NULL, NULL, (generic_op)npuzzle_kill);
+    back_path = list_create(NULL,
+                            NULL,
+                            (generic_op)npuzzle_kill);
     list_push_front(back_path, board);
     while(board->parent_state) {
         board = board->parent_state;
@@ -200,7 +203,9 @@ list* npuzzle_gen_successors(npuzzle* board, void* null) {
     int i;
     list* successor_list;
     npuzzle* successor_board;
-    successor_list = list_create(NULL, (generic_cpy)npuzzle_copy_game, (generic_op)npuzzle_kill);
+    successor_list = list_create(NULL,
+                                 (generic_cpy)npuzzle_copy_game,
+                                 (generic_op)npuzzle_kill);
     if(board->hole_tile - board->board_dim < 0 || !(board->hole_tile % board->board_dim)) { /* FR or FC */
         if(board->hole_tile % board->board_dim) { /* FR, !LR, !FC */
             if((board->hole_tile + 1) % board->board_dim) { /* FR, !LR, !FC, !LC */

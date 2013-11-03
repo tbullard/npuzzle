@@ -22,8 +22,8 @@ array_list* array_list_copy(array_list* array) {
     new_array = NULL;
     if(array) {
         new_array = array_list_create(array->comp_func,
-                                   array->copy_func,
-                                   array->free_func);
+                                      array->copy_func,
+                                      array->free_func);
         for(i = 0; i < array_list_length(array); i++) {
             data = array->memory[i] ? array->copy_func(array->memory[i]) : NULL;
             array_list_push(new_array, data);
@@ -52,7 +52,8 @@ int array_list_push(array_list* array, void* data) {
     if(array) {
         pushed = 1;
         if ((array->allocated - array->used) < size) {
-            toallocate = (array->allocated == 0) ? size : (array->allocated * 2);
+            toallocate = (array->allocated == 0) ? size :
+                         (array->allocated * 2);
             array->memory = realloc(array->memory, toallocate);
             array->allocated = toallocate;
         }
