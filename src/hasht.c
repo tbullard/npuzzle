@@ -6,8 +6,7 @@ typedef struct hash_table_bucket {
     char removed;
 } bucket;
 
-static bucket* hash_table_bucket_create(void* data,
-                                        unsigned int hash_key) {
+static bucket* hash_table_bucket_create(void* data, unsigned int hash_key) {
     bucket* buck;
     buck = malloc(sizeof(bucket));
     buck->data = data;
