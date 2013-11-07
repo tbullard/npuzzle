@@ -257,7 +257,6 @@ void npuzzle_kill(npuzzle* board) {
     return;
 }
 
-
 static void first_row_tile_swap(npuzzle* board, int form) {
     if(!form) {
         array_list_swap(board->board_state, board->hole_tile, board->hole_tile + 1);
