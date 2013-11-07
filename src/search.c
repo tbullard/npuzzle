@@ -14,11 +14,11 @@ list* search_breadth_first(void* state,
     void* current_state, *successor_state;
     list* state_queue, *successor_list, *path;
     hash_table* state_closed_set;
-    
+
     state_queue = list_create(NULL,
                               NULL,
                               state_free_func);
-    
+
     state_closed_set = hash_table_create(89,
                                          .75,
                                          state_hash_alg,
@@ -58,7 +58,8 @@ list* search_breadth_first(void* state,
     return path;
 }
 
-list* search_a_star(void* state, void* state_world,
+list* search_a_star(void* state,
+                    void* state_world,
                     search_is_goal state_goal_func,
                     search_gen_successors state_gen_func,
                     search_link_parent state_link_func,
@@ -77,25 +78,25 @@ list* search_a_star(void* state, void* state_world,
     hash_table* states_closed_set, *states_open_set;
     hash_map* states_g_cost, *states_f_cost, *states_heap_index;
     heap* states_heap;
-    
+
     states_overflow = list_create(NULL,
                                   NULL,
                                   state_free_func);
-    
+
     states_closed_set = hash_table_create(89,
                                           .75,
                                           state_hash_alg,
                                           state_comp_func,
                                           state_copy_func,
                                           state_free_func);
-    
+
     states_open_set = hash_table_create(89,
                                         .75,
                                         state_hash_alg,
                                         state_comp_func,
                                         state_copy_func,
                                         state_free_func);
-    
+
     states_g_cost = hash_map_create(89,
                                     .75,
                                     state_hash_alg,
@@ -105,7 +106,7 @@ list* search_a_star(void* state, void* state_world,
                                     NULL,
                                     state_free_func,
                                     (generic_op)free);
-    
+
     states_f_cost = hash_map_create(89,
                                     .75,
                                     state_hash_alg,
@@ -115,7 +116,7 @@ list* search_a_star(void* state, void* state_world,
                                     NULL,
                                     state_free_func,
                                     (generic_op)free);
-    
+
     states_heap_index = hash_map_create(89,
                                         .75,
                                         state_hash_alg,
@@ -125,7 +126,7 @@ list* search_a_star(void* state, void* state_world,
                                         NULL,
                                         NULL,
                                         NULL);
-    
+
     states_heap = heap_create(89,
                               state_heap_func,
                               state_comp_func,
