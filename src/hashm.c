@@ -39,7 +39,7 @@ hash_map* hash_map_create(unsigned int capacity,
     new_hash->free_value_func = free_value_func;
     new_hash->load_factor_limit = (load_factor_limit > 0 &&
                                    load_factor_limit <= 1) ?
-        load_factor_limit : DEFAULT_LDFACT;
+                                   load_factor_limit : DEFAULT_LDFACT;
     new_hash->capacity = (capacity > 0) ? capacity : DEFAULT_CAPACY;
     new_hash->size = 0;
     new_hash->cur_load_factor = 0;

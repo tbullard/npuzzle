@@ -53,7 +53,7 @@ int array_list_push(array_list* array, void* data) {
         pushed = 1;
         if ((array->allocated - array->used) < size) {
             toallocate = (array->allocated == 0) ? size :
-                (array->allocated * 2);
+                         (array->allocated * 2);
             array->memory = realloc(array->memory, toallocate);
             array->allocated = toallocate;
         }
