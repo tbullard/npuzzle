@@ -8,7 +8,7 @@ TARGET=ai
 
 #LDIR =../lib
 
-LIBS=-lm
+#LIBS=
 
 #$(LIBS) --> target end
 
@@ -23,7 +23,7 @@ $(ODIR)/%.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(TARGET): $(OCTO) $(OBJ)
-	gcc -o $@ $^ $(CFLAGS) $(LIBS)
+	gcc -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
 

@@ -6,9 +6,9 @@ typedef struct list_node {
     void* data;
 } node;
 
-static node* node_create(void* data);
+static node* list_node_create(void* data);
 
-static node* node_create(void* data) {
+static node* list_node_create(void* data) {
     node* new_node;
     new_node = malloc(sizeof(node));
     new_node->prev = NULL;
@@ -51,7 +51,7 @@ list* list_copy(list* llist) {
 void list_push_front(list* llist, void* data) {
     node* new_node;
     if(llist) {
-        new_node = node_create(data);
+        new_node = list_node_create(data);
         if(llist->head) {
             llist->head->prev = new_node;
         } else {
@@ -67,7 +67,7 @@ void list_push_front(list* llist, void* data) {
 void list_push_back(list* llist, void* data) {
     node* new_node;
     if(llist) {
-        new_node = node_create(data);
+        new_node = list_node_create(data);
         if(llist->tail) {
             llist->tail->next = new_node;
         } else {
@@ -90,7 +90,7 @@ int list_insert_at(list* llist, int index, void* data) {
         if(insert) {
             if(index) {
                 if(index != llist->size) {
-                    new_node = node_create(data);
+                    new_node = list_node_create(data);
                     cur_Index = 0;
                     cur_node = llist->head;
                     while(cur_Index != index) {
@@ -406,3 +406,39 @@ void list_traverse(list* llist, generic_op do_func) {
     }
     return;
 }
+
+/*!
+  \file llist.c
+  \brief Linked List source file.
+  \details Source file for linked list, contains all functions and declarations, static and otherwise.
+  \note Traditional zero-style indexing is used for this linked list implementation. The first index is '0', second '1', etc.
+  \warning It is assumed that all data inserted into the list is heap allocated.
+  Failure durring deallocation will occur if that is not the case.
+  \author Timothy Bullard
+  \version 1.0
+*/
+
+/*!
+  \var typedef struct list_node node
+  \brief Typedef of struct list_node to 'node'.
+*/
+
+/*!
+  \struct list_node
+  \brief Fundamental node structure for linked list.
+  \var list_node::prev
+  Member 'prev' represents a pointer to the node that is previous, or behind, a given node.
+  \var list_node::next
+  Member 'next' represents a pointer to the node that is next, or in front of, a given node.
+  \var list_node::data
+  Member 'data' represents the allocated data to be stored in the node.
+*/
+
+/*!
+  \static
+  \fn node* list_node_create(void* data)
+  \brief Creates note for given data.
+  \param data Allocated data to be wrapped in a lnode.
+  \return Newly allocated list node containing data.
+*/
+

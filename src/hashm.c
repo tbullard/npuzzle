@@ -1,13 +1,13 @@
 #include "hashm.h"
 
-typedef struct hash_bucket {
+typedef struct hash_map_bucket {
     void* key;
     void* value;
     unsigned int hash_key;
     char removed;
 } bucket;
 
-static bucket* hash_bucket_create(void* key, void* value,
+static bucket* hash_map_bucket_create(void* key, void* value,
                                   unsigned int hash_key) {
     bucket* new_bucket;
     new_bucket = malloc(sizeof(bucket));
@@ -39,7 +39,7 @@ hash_map* hash_map_create(unsigned int capacity,
     new_hash->free_value_func = free_value_func;
     new_hash->load_factor_limit = (load_factor_limit > 0 &&
                                    load_factor_limit <= 1) ?
-                                   load_factor_limit : DEFAULT_LDFACT;
+        load_factor_limit : DEFAULT_LDFACT;
     new_hash->capacity = (capacity > 0) ? capacity : DEFAULT_CAPACY;
     new_hash->size = 0;
     new_hash->cur_load_factor = 0;
@@ -73,7 +73,7 @@ hash_map* hash_map_copy(hash_map* hash) {
                 cur_bucket = hash->bucket_list[i];
                 if(cur_bucket) {
                     if(!cur_bucket->removed) {
-                        new_bucket = hash_bucket_create(hash->copy_key_func(cur_bucket->key),
+                        new_bucket = hash_map_bucket_create(hash->copy_key_func(cur_bucket->key),
                                                         hash->copy_value_func(cur_bucket->value),
                                                         cur_bucket->hash_key);
                         new_hash->bucket_list[i] = new_bucket;
@@ -136,7 +136,7 @@ int hash_map_insert(hash_map* hash, void* key, void* value, int soft_insert) {
             free(new_hash);
         }
         hash_key = hash->hash_alg(key) % hash->capacity;
-        new_bucket = hash_bucket_create(key, value, hash_key);
+        new_bucket = hash_map_bucket_create(key, value, hash_key);
         dest_bucket = hash->bucket_list[new_bucket->hash_key];
         j = 0;
         while(dest_bucket && !empty) {
@@ -423,7 +423,6 @@ void hash_map_dissolve_values(hash_map* hash) {
     return;
 }
 
-
 void hash_map_traverse(hash_map* hash, generic_op do_func) {
     int i;
     bucket* cur_bucket;
@@ -441,3 +440,43 @@ void hash_map_traverse(hash_map* hash, generic_op do_func) {
     }
     return;
 }
+
+/*!
+  \file hashm.c
+  \brief Hash Map source file.
+  \details Source file for hash map, contains all functions and declarations
+  a user may call.
+  \warning It is assumed that all keys and values inserted into the hash map are heap allocated.
+  Failure durring deallocation will occur if that is not the case.
+  \author Timothy Bullard
+  \version 1.0
+*/
+
+/*!
+  \var typedef struct hash_map_bucket bucket
+  \brief Typedef of struct hash_map_bucket to 'bucket'.
+*/
+
+/*!
+  \struct hash_map_bucket
+  \brief Fundamental hash map bucket structure.
+  \var hash_map_bucket::key
+  Member 'key' represents the allocated key in the bucket.
+  \var hash_map_bucket::value
+  Member 'value' represents the allocated value to be paired with the bucket's key.
+  \var hash_map_bucket::hash_key
+  Member 'hash_key' represents the numberical hash value of the 'key' member.
+  \var hash_map_bucket::removed
+  Member 'removed' represents the flag denoting if the bucket has been removed, and is therefore valid.
+*/
+
+/*!
+  \static
+  \fn bucket* hash_map_bucket_create(void* key, void* value, unsigned int hash_key)
+  \brief Creates and returns a newly allocated bucket.
+  \param key Bucket's key.
+  \param value Bucket's value.
+  \param hash_key Hashed form of bucket's key.
+  \return Newly allocated bucket.
+*/
+

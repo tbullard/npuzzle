@@ -53,7 +53,7 @@ int array_list_push(array_list* array, void* data) {
         pushed = 1;
         if ((array->allocated - array->used) < size) {
             toallocate = (array->allocated == 0) ? size :
-                         (array->allocated * 2);
+                (array->allocated * 2);
             array->memory = realloc(array->memory, toallocate);
             array->allocated = toallocate;
         }
@@ -222,3 +222,14 @@ void array_list_traverse(array_list* array, generic_op do_func) {
     }
     return;
 }
+
+/*!
+  \file arraylist.c
+  \brief Arraylist source file.
+  \details Source file for arraylist, contains all functions and declarations.
+  \note Traditional zero-style indexing is used for this dynamic array implementation. The first index is '0', second '1', etc.
+  \warning It is assumed that all data inserted into the array is heap allocated.
+  Failure durring deallocation will occur if that is not the case.
+  \author Timothy Bullard
+  \version 1.0
+*/

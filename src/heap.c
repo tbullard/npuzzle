@@ -5,6 +5,8 @@ typedef struct heap_node {
     int index;
 } node;
 
+static node* heap_node_ceate(int index, void* data);
+
 static node* heap_node_ceate(int index, void* data) {
     node* new_node;
     new_node = malloc(sizeof(node));
@@ -13,7 +15,7 @@ static node* heap_node_ceate(int index, void* data) {
     return new_node;
 }
 
-heap* heap_create(unsigned int init_capacity,
+heap* heap_create(unsigned int capacity,
                   heap_comp heap_func,
                   generic_comp comp_func,
                   generic_cpy copy_func,
@@ -26,7 +28,7 @@ heap* heap_create(unsigned int init_capacity,
     new_heap->copy_func = copy_func;
     new_heap->free_func = free_func;
     new_heap->size = 0;
-    new_heap->capacity = init_capacity ? init_capacity : DEFAULT_HEAP_CAPACY;
+    new_heap->capacity = capacity ? capacity : DEFAULT_HEAP_CAPACY;
     new_heap->heap_memory = malloc(new_heap->capacity * sizeof(node*));
     for(i = 0; i < new_heap->capacity; i++) {
         new_heap->heap_memory[i] = NULL;
@@ -271,14 +273,50 @@ void heap_dissolve(heap* p_queue) {
 
 void heap_traverse(heap* p_queue, generic_op do_func) {
     int i;
-    node* cur_Node;
+    node* cur_node;
     if(p_queue) {
         if(!heap_is_empty(p_queue)) {
             for(i = 0; i < p_queue->size; i++) {
-                cur_Node = p_queue->heap_memory[i];
-                do_func(cur_Node->data);
+                cur_node = p_queue->heap_memory[i];
+                do_func(cur_node->data);
             }
         }
     }
     return;
 }
+
+/*!
+  \file heap.c
+  \brief Heap source file.
+  \details Header file for heap, contains all functions and declarations.
+  \warning It is assumed that all data inserted into the heap is heap allocated.
+  Failure durring deallocation will occur if that is not the case.
+  \author Timothy Bullard
+  \version 1.0
+*/
+
+/*!
+  \var typedef struct heap_node node
+  \brief Typedef of struct heap_node to 'node'.
+*/
+
+/*!
+  \struct heap_node
+  \brief Fundamental heap node structure.
+  \var heap_node::data
+  Member 'data' represents the allocated data in the node.
+  \var heap_node::index
+  Member 'hash_key' represents the location of the node in the heap.
+*/
+
+/*!
+  \static
+  \fn heap_node_ceate(int index, void* data)
+  \brief Creates and returns a newly allocated node.
+  \param index Location of node in heap.
+  \param data Nodes's data.
+  \return Newly allocated node.
+*/
+
+
+
