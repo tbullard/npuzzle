@@ -41,7 +41,7 @@ hash_table* hash_table_create(unsigned int capacity,
     return hash;
 }
 
-hash_table* copy_hash_table(hash_table* hash) {
+hash_table* hash_table_copy(hash_table* hash) {
     unsigned int i;
     bucket* cur_Bucket;
     bucket* new_Bucket;
@@ -294,3 +294,39 @@ void hash_table_traverse(hash_table* hash, generic_op do_func) {
     }
     return;
 }
+
+/*!
+  \file hasht.c
+  \brief Hash Table source file.
+  \details Source file for hash table, contains all functions and declarations
+  a user may call.
+  \warning It is assumed that all data inserted into the hash table is  heap allocated.
+  Failure durring deallocation will occur if that is not the case.
+  \author Timothy Bullard
+  \version 1.0
+*/
+
+/*!
+  \var typedef struct hash_table_bucket bucket
+  \brief Typedef of struct hash_table_bucket to 'bucket'.
+*/
+
+/*!
+  \struct hash_table_bucket
+  \brief Fundamental hash table bucket structure.
+  \var hash_table_bucket::data
+  Member 'data' represents the allocated data in the bucket.
+  \var hash_table_bucket::hash_key
+  Member 'hash_key' represents the numberical hash value of the 'data' member.
+  \var hash_table_bucket::removed
+  Member 'removed' represents the flag denoting if the bucket has been removed, and is therefore valid.
+*/
+
+/*!
+  \static
+  \fn bucket* hash_table_bucket_create(void* data,  unsigned int hash_key)
+  \brief Creates and returns a newly allocated bucket.
+  \param data Bucket's data.
+  \param hash_key Hashed form of bucket's data.
+  \return Newly allocated bucket.
+*/
